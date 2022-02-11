@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="icon" href="https://cdn-icons.flaticon.com/png/128/2353/premium/2353092.png?token=exp=1644516328~hmac=f7ec26661cc77d13f1cde248cfc4939a">
+    <link rel="stylesheet" href="./components/sidebar.css">
+    <link rel="stylesheet" href="./components/display.css">
+</head>
+<body>
+    <div id="side_bar">
+    </div>
+
+    <div id="container">
+        <h1>Trending News --</h1>
+    </div>
+    
+</body>
+</html>
+
+
+<script type="module">
+    // key = 1241d8a544a54f3084470b6cb89e4a16
+
+    import nav from "./components/sidebar.js";
+    document.getElementById("side_bar").innerHTML = nav()
+
+    
+
+    news()
+
+    async function news(){
+        let res = await fetch("https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=1241d8a544a54f3084470b6cb89e4a16");
+        let data= await res.json();
+        console.log(data)
+        let articles = data.articles;
+        display(articles)
+    }
+
+    let cont = document.getElementById("container");
+    function display(arr){
+        arr.forEach((item, index)=>{
+            // console.log(item)
+            let div = document.createElement("div");
+            div.id = "box";
+            // console.log(item)
+            div.addEventListener("click", function(){
+                // console.log(item)
+                set(item)
+            })
+
+            let title = item.title;
+            let name = document.createElement("p");
+            name.id = "name"
+            name.textContent = title;
+            let des = document.createElement("p");
+            des.id = "des"
+            des.textContent = item.description;
+            let img = document.createElement("img");
+            img.id = "img"
+            img.src = item.urlToImage;
+            div.append(name, des, img);
+            cont.append(div);
+        })
+    }
+
+    function set(item){
+        localStorage.setItem("news", JSON.stringify(item));
+        window.location.href = "news.html"
+    }
+
+    document.getElementById("search").addEventListener("click", getinput);
+    function getinput(){
+        let input  = document.getElementById("input").value;
+        localStorage.setItem("searchnews", JSON.stringify(input));
+        window.location.href = "search.html"
+    }
+    
+</script>

@@ -1,0 +1,40 @@
+#container{
+    width: 1130px;
+    height: 700px;
+    /* border: 1px solid olive; */
+    position: relative;
+    left: 200px;
+}
+#box{
+    display: flex;
+    margin-top: 20px;
+    border-radius: 15px;
+    height: 150px;
+    width: 100%;
+    /* border: 1px solid red; */
+    gap:10px;
+    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    cursor: pointer;
+}
+#img{
+    margin: 15px 0px;
+    height: 120px;
+    /* width: 200px; */
+}
+#h2{
+    font-size: 22px;
+    font-weight: 600;
+    color: teal;
+}
+#box>p{
+    /* color: red; */
+    width: 700px;      
+}
+#name{
+    /* color: red; */
+    font-size: 20px;
+    font-weight: 600;
+    /* border: 1px solid teal; */
+    width: 350px !important;
+}

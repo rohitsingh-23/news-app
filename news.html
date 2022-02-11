@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News</title>
+    <link rel="stylesheet" href="./components/sidebar.css">
+    <link rel="icon"
+        href="https://cdn-icons.flaticon.com/png/128/2353/premium/2353092.png?token=exp=1644516328~hmac=f7ec26661cc77d13f1cde248cfc4939a">
+    <style>
+        #container{
+            width: 1100px;
+            /* height: 700px; */
+            /* border: 1px solid olive; */
+            position: relative;
+            left: 200px;
+            padding: 20px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
+        #img{
+            width: 900px;
+        }
+        #title{
+            font-size: 23px;
+            font-weight: 600;
+        }
+        #des{
+            font-size: 20px;
+            font-weight: 400;
+        }
+    </style>
+</head>
+<body>
+    <div id="side_bar">
+    </div>
+    <div id="container">
+    </div>
+</body>
+</html>
+
+<script type="module"> 
+    import nav from "./components/sidebar.js";
+    document.getElementById("side_bar").innerHTML = nav()
+
+
+    let news = JSON.parse(localStorage.getItem("news"));
+    console.log(news);
+
+    let div = document.createElement("div");
+
+    let img = document.createElement("img");
+    img.id = "img"
+    img.src = news.urlToImage;
+
+    let title = document.createElement("p");
+    title.id = "title"
+    title.textContent = news.title;
+
+    let des = document.createElement("p");
+    des.id = "des"
+    des.textContent = news.description;
+
+    div.append(img, title, des);
+    document.getElementById("container").append(div);
+
+    document.getElementById("search").addEventListener("click", getinput);
+    function getinput(){
+        let input  = document.getElementById("input").value;
+        localStorage.setItem("searchnews", JSON.stringify(input));
+        window.location.href = "search.html"
+    }
+    
+    document.getElementById("home").addEventListener("click", function(){
+        window.location.href = "index.html"
+    })
+</script>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="./components/sidebar.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./components/display.css">
+    <link rel="icon"
+        href="https://cdn-icons.flaticon.com/png/128/2353/premium/2353092.png?token=exp=1644516328~hmac=f7ec26661cc77d13f1cde248cfc4939a">
+    <title>Search Result</title>
+</head>
+<body>
+    <div id="side_bar">
+    </div>
+
+    <div id="container">
+        <h1 id="n"></h1>
+    </div>
+</body>
+</html>
+
+<script type="module">
+     import nav from "./components/sidebar.js";
+    document.getElementById("side_bar").innerHTML = nav()
+
+    //link = https://newsapi.org/v2/everything?q=tesla&from=2021-11-13&sortBy=publishedAt&apiKey=1241d8a544a54f3084470b6cb89e4a16
+
+    let input = JSON.parse(localStorage.getItem("searchnews"));
+    let n = document.getElementById("n").textContent = `Search result for- ${input}`
+    //https://newsapi.org/v2/everything?q=tesla&from=2022-01-11&sortBy=publishedAt&apiKey=1241d8a544a54f3084470b6cb89e4a16
+    get()
+    async function get(){
+        console.log(input) //${ input }
+        let res = await fetch(`https://newsapi.org/v2/everything?q=${input }&from=2022-01-11&sortBy=publishedAt&apiKey=1241d8a544a54f3084470b6cb89e4a16`);
+        let data = await res.json();
+        let articles = data.articles;
+        console.log(articles)
+        display(articles)
+    }
+
+    let cont = document.getElementById("container");
+    function display(arr){
+        arr.forEach((item, index)=>{
+            // console.log(item)
+            let div = document.createElement("div");
+            div.id = "box";
+            // console.log(item)
+            div.addEventListener("click", function(){
+                // console.log(item)
+                set(item)
+            })
+
+            let title = item.title;
+            let name = document.createElement("p");
+            name.id = "name"
+            name.textContent = title;
+            let des = document.createElement("p");
+            des.id = "des"
+            des.textContent = item.description;
+            let img = document.createElement("img");
+            img.id = "img"
+            img.src = item.urlToImage;
+            div.append(name, des, img);
+            cont.append(div);
+        })
+    }
+    function set(item){
+        localStorage.setItem("news", JSON.stringify(item));
+        window.location.href = "news.html"
+    }
+
+    document.getElementById("search").addEventListener("click", getinput);
+    function getinput(){
+        let input  = document.getElementById("input").value;
+        localStorage.setItem("searchnews", JSON.stringify(input));
+        window.location.href = "search.html"
+    }
+
+    document.getElementById("home").addEventListener("click", function(){
+        window.location.href = "index.html"
+    })
+</script>
