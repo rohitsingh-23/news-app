@@ -18,5 +18,11 @@ In this app you search search news by the topics, by organisation or any person 
 
 # Images
 
+### Trending News
+![image](https://github.com/rohitsingh-23/news-app/blob/main/Ss/Trending.png?raw=true)
+
 ### Search Result
-![image](https://github.com/rohitsingh-23/weather-app/blob/main/Ss/Search%20Result.png?raw=true)
+![image](https://github.com/rohitsingh-23/news-app/blob/main/Ss/Search%20Result.png?raw=true)
+
+### Card View
+![image](https://github.com/rohitsingh-23/news-app/blob/main/Ss/News.png?raw=true)
